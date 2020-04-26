@@ -1,7 +1,7 @@
 // 这里需要用到node的path模块
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // html解析
+const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // 清除 dist 目录
 
 module.exports = {
   mode: "development", // "production" | "development"
