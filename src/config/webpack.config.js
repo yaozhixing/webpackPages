@@ -25,7 +25,7 @@ module.exports = {
 
   // 指定需要打包的文件
   entry: {
-    main: './src/index/index.js'
+    main: './src/pages/index/index.js'
   },
 
   // 指定打包后文件输出的路径和输出文件的名称
@@ -36,6 +36,14 @@ module.exports = {
 
   // 打包前和打包后映射关系
   devtool: "cheap-module-eval-source-map",  // product: cheap-module-source-map
+
+
+  resolve: {
+    extensions: [".js", ".json", ".jsx", ".vue", ".less", ".scss", ".css"],
+    alias: { //模快别名列表
+      '@': path.resolve(__dirname, '../src')
+    }
+  },
 
   module: {
     rules: [
@@ -78,10 +86,9 @@ module.exports = {
     // 打包前清除输出目录
     new CleanWebpackPlugin(),
 
-    // 通过new一下这个类来使用插件
     new HtmlWebpackPlugin({
       // 在src目录下创建一个index.html
-      template: './src/index/index.html',
+      template: './src/pages/index/index.html',
       hash: true, // 会在打包好的bundle.js后面加上hash串
     })
   ]
