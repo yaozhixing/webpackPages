@@ -7,15 +7,15 @@ const webpackDevConf = {
 
   mode: "development",
 
-  // output: {
-  //   filename: "js/[name]bundle.js",
-  //   path: path.resolve(__dirname, "dist"),
-  // },
-
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist")
+    filename: "js/[name]bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
+
+  // output: {
+  //   filename: "bundle.js",
+  //   path: path.resolve(__dirname, "dist")
+  // },
 
   devtool: "cheap-module-eval-source-map",  // product: cheap-module-source-map
 
@@ -41,9 +41,6 @@ const webpackDevConf = {
     }
 
   },
-
-
-
 }
 
 // console.log("dev---------------------------------", 1111111111111111111111111)
