@@ -1,1 +1,1 @@
-import './company.css'
+// import './company.css'

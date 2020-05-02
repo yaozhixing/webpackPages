@@ -1,1 +1,1 @@
-import './product.css'
+// import './product.css'
