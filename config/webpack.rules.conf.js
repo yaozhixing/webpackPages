@@ -1,10 +1,18 @@
+const ExtractTextPlugin = require("extract-text-webpack-plugin"); // header的style => 打包独立的css
+
 const rules = [
   /*
     css,scss,sass 处理
   */
   {
     test: /\.(css|scss|sass)$/,
-    use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"]
+    //use: ["style-loader", "css-loader", "sass-loader", "postcss-loader"]
+    use: ExtractTextPlugin.extract({
+      fallback: "style-loader",
+      use: ["css-loader", "sass-loader", "postcss-loader"],
+      // css中的基础路径
+      publicPath: "../"
+    })
   },
 
   /*
@@ -13,7 +21,13 @@ const rules = [
   {
     test: /\.js$/,
     use: [{
-      loader: "babel-loader"
+      loader: "babel-loader",
+      options: {
+        cacheDirectory: true,
+        presets: [
+          ['@babel/preset-env', { modules: false }]
+        ]
+      }
     }],
     exclude: "/node_modules" // 不包括
   },
@@ -26,7 +40,7 @@ const rules = [
     use: {
       loader: "html-loader",
       options: {
-        attrs: ["img:src", "img:data-src", "audio:src"],
+        // attrs: ["img:src", "img:data-src", "audio:src"],
         minimize: true
       }
     }

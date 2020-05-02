@@ -41,7 +41,7 @@ const webpackDevConf = {
       }
     }
 
-  }
+  },
 }
 
 module.exports = merge(webpackBaseConf, webpackDevConf);

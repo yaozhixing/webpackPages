@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // html解析
 const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // 清除 dist 目录
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 /* 外部引入文件 */
 const getEntry = require("./entry.config"); // 入口集合
@@ -29,50 +30,29 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
 
-    // new HtmlWebpackPlugin({
-    //   // 在src目录下创建一个index.html
-    //   filename: 'index.html',
-    //   template: './src/pages/index/index.html',
-    //   hash: true, // 会在打包好的bundle.js后面加上hash串
-    // }),
+    // 分离css插件参数为提取出去的路径
+    new ExtractTextPlugin({
+      filename: 'css/[name].[hash:8].min.css',
+    })
 
-    // new HtmlWebpackPlugin({
-    //   filename: 'aboutUs.html',
-    //   template: './src/pages/aboutUs/index.html',
-    //   hash: true,
-    // }),
-
-    // new HtmlWebpackPlugin({
-    //   filename: 'company.html',
-    //   template: './src/pages/company/index.html',
-    //   hash: true,
-    // }),
-
-    // new HtmlWebpackPlugin({
-    //   filename: 'product.html',
-    //   template: './src/pages/product/index.html',
-    //   hash: true,
-    // })
   ]
 }
-
-// const renderHtmlPlugins = (item) => {
-//   return new HtmlWebpackPlugin({
-//     filename: `${item}.html`,
-//     template: `./src/pages/${item}/index.html`,
-//     // template: `./src/pages/${item}/index.html`,
-//     hash: true
-//   })
-// }
 
 
 // 批量生成 html 模板
 Object.keys(getEntry()).forEach((item) => {
-  console.log("-----------------------", item)
-  // module.exports.plugins.push(renderHtmlPlugins(item))
   module.exports.plugins.push(new HtmlWebpackPlugin({
     filename: `${item}.html`,
     template: `./src/pages/${item}/index.html`,
-    hash: true
+    inject: true,
+    //按chunks的顺序对js进行引入
+    chunkSortMode: 'dependency',
+    hash: true,
+    chunks: [item], // 【注意】：加载相对应的js入口文件，不然会加载全部的入口文件
+    minify: {
+      removeComments: true, //移除HTML中的注释
+      collapseWhitespace: true, //折叠空白区域 也就是压缩代码
+      removeAttributeQuotes: true, //去除属性引用
+    },
   }))
 });
