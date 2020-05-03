@@ -1,3 +1,6 @@
+import './index1.scss'
+import './index2.scss'
+
 import mHeader from './header.js'
 import mContent from './content.js'
 import mFooter from './footer.js'

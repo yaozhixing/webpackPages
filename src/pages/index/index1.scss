@@ -1,0 +1,35 @@
+body{
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  p{
+    margin: 0;
+    padding: 0;
+  }
+  div{
+    position: relative;
+  }
+}
+
+.ta-c{
+  text-align: center;
+}
+
+.ta-r{
+  text-align: right;
+}
+
+.ta-l{
+  text-align: left;
+}
+
+.mt-10{
+  margin-top: 10px;
+}
+.mt-20{
+  margin-top: 20px;
+}
+.mt-30{
+  margin-top: 30px;
+}
